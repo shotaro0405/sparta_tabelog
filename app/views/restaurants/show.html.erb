@@ -28,7 +28,7 @@
     <%= link_to 'レビューを書く', new_restaurant_review_path(@restaurant) %>
 
     <hr>
-
+    <%= @review %>
     <h2>レビュー一覧</h2>
         <% @restaurant.reviews.each do |review| %>
           <p>
