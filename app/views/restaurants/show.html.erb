@@ -1,25 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Telephone:</strong>
-  <%= @restaurant.telephone %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @restaurant.name %>
+    </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+    <p>
+      <strong>Telephone:</strong>
+      <%= @restaurant.telephone %>
+    </p>
 
-<p>
-  <strong>Web:</strong>
-  <%= @restaurant.web %>
-</p>
+    <p>
+      <strong>Address:</strong>
+      <%= @restaurant.address %>
+    </p>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
-<%= link_to 'レビューを書く', new_restaurant_review_path(@restaurant) %>
+    <p>
+      <strong>Web:</strong>
+      <%= @restaurant.web %>
+    </p>
+
+    <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+    <%= link_to 'Back', restaurants_path %>
+    <%= link_to 'レビューを書く', new_restaurant_review_path(@restaurant) %>
+
+    <hr>
+
+    <h2>レビュー一覧</h2>
+        <% @restaurant.reviews.each do |review| %>
+          <p>
+            <%= review.body %> <br>
+            by <%= review.user.email %>
+          </p>
+        <% end %>
+        <hr>
+        <h2>レビューを残したユーザー一覧</h2>
+        <%# throughオプションのおかげで、BookはReviewを介してUserにアクセスできる  %>
+        <% @restaurant.users.each do |user| %>
+          <p><%= user.email %></p>
+        <% end %>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,26 @@
+<%= form_for([@restaurant, @review]) do |f| %>
+  <div class="form-group">
+    <%= f.label :score, '点数' %><br>
+    <%= f.select :score,
+      [
+        ["★★★★★ 5", 5],
+        ["★★★★☆ 4", 4],
+        ["★★★☆☆ 3", 3],
+        ["★★☆☆☆ 2", 2],
+        ["★☆☆☆☆ 1", 1]
+      ],
+    class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :title, 'タイトル' %><br>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body, 'レビュー' %><br>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
