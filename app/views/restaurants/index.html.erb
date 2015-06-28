@@ -1,7 +1,116 @@
+<div class="row">
 <p id="notice"><%= notice %></p>
+<h2>レストラン一覧</h2>
 
-<h1>Listing Restaurants</h1>
+<% @restaurants.each do |restaurant| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>
+      <a href="/restaurants/<%= restaurant.id %>" >
+      <%= restaurant.name %>
+      </a>
+    </strong>
+    <span class="text-muted pull-right">
+    <%= restaurant.created_at.strftime('%Y/%m/%d') %>
+    </span>
+  </div>
 
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="thumbnail">
+          <img src="<%= restaurant.image_url %>" class="img-responsive user-photo">
+        </div>
+      </div>
+      <div class="col-sm-10">
+        <p>[口コミ<%= restaurant.reviews.count %>件]</p>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <% @reviews = Review.where(:restaurant_id => restaurant.id) %>
+              <% @reviews.each do |review| %>
+                <li><%= review.title %></li>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<h2>新着口コミ</h2>
+
+<% @user.each do |user| %>
+  <!-- thumbnail -->
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="thumnail">
+        <img src="<%= user.image_url %>" class="img-responsive user-photo">
+    </div>
+  </div>
+
+  <!-- レビュー文章 -->
+  <div class="col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      <strong>
+        <%= Review.first.title %>
+      </strong>
+      <span class="text-muted pull-right">
+      <%= Review.first.created_at.strftime('%Y/%m/%d') %>
+      </span>
+      </div>
+
+      <div class="panel-body">
+        <p>
+          <p>
+          <%= truncate(Review.first.body, :length => 50) %>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<% end %>
+
+<div class="col-lg-4">
+<%= link_to '新しくお店を登録する', new_restaurant_path, class: "btn btn-success btn-block" %>
+</div>
+
+<hr>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-left">
+        <img class="media-object" src="http://placehold.it/100x100">
+      </div>
+
+      <div class="media-body">
+        <p>ようこそ hogehoge@hogehoge.com さん</p>
+        <p>口コミ：１件</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      人気のお店
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">伊吹</li>
+    <li class="list-group-item">一燈</li>
+    <li class="list-group-item">道</li>
+    <li class="list-group-item">麺屋 吉左右</li>
+  </ul>
+
+</div>
+
+<!-- 以下、初期に記述されたコード -->
+<!--
 <table>
   <thead>
     <tr>
@@ -27,7 +136,7 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Restaurant', new_restaurant_path %>
+</div>
+-->

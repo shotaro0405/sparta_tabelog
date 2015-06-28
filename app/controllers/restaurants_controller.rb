@@ -6,12 +6,29 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    @user = User.all
   end
 
   # GET /restaurants/1
   # GET /restaurants/1.json
   def show
     @review = Review.where(:restaurant_id => params[:id]).average(:score)
+      if @review == 5
+        @avg = "★★★★★"
+      elsif @review >= 4
+        @avg = "★★★★☆"
+      elsif @review >= 3
+        @avg = "★★★☆☆"
+      elsif @review >= 2
+        @avg = "★★☆☆☆"
+      elsif @review >= 1
+        @avg = "★☆☆☆☆"
+      else
+        @avg = "評価はありません"
+      end
+      #評価の文字列が表示されない
+
+    @score = Review.find(params[:id])
   end
 
   # GET /restaurants/new
@@ -71,6 +88,6 @@ class RestaurantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :telephone, :address, :web)
+      params.require(:restaurant).permit(:name, :telephone, :address, :web, :image_url)
     end
 end

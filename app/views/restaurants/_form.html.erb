@@ -12,22 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name, "店名" %><br>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
+
   <div class="field">
-    <%= f.label :telephone %><br>
-    <%= f.text_field :telephone %>
+    <%= f.label :telephone, "電話番号" %><br>
+    <%= f.text_field :telephone, class: "form-control" %>
   </div>
+
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.label :address, "住所" %><br>
+    <%= f.text_field :address, class: "form-control" %>
   </div>
+
   <div class="field">
-    <%= f.label :web %><br>
-    <%= f.text_field :web %>
+    <%= f.label :web, "ホームページ" %><br>
+    <%= f.text_field :web, class: "form-control" %>
   </div>
+
+  <div class="field">
+    <%= f.label :image_url, "お店画像" %><br>
+    <%= f.text_field :image_url, class: "form-control" %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  class: 'btn btn-default' %>
   </div>
 <% end %>

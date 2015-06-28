@@ -1,23 +1,140 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
 
-    <p id="notice"><%= notice %></p>
+    <div class="col-lg-12">
+      <h1><%= @restaurant.name %>
+      <span class="pull-right"><%= @restaurant.telephone %></span>
+      </h1>
+    </div>
 
+    <hr>
+
+    <h2>
+      <b style="color:red;">
+        <%= @avg %>
+        <%= @review %>
+      </b>
+    </h2>
+
+    <%= link_to 'レビューを書く', new_restaurant_review_path(@restaurant), class: 'btn btn-default' %>
+    <hr>
+
+ <% @restaurant.reviews.each do |review| %>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="panel panel-default">
+
+          <div class="panel-heading">
+              <h3 class="panel-title">
+              <%= review.title %>
+              <span class="pull-right">
+                <small>訪問日：<%= review.created_at.strftime('%Y/%m/%d') %></small>
+              </span>
+              </h3>
+          </div>
+
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left">
+                <img class="media-object" src="http://placehold.it/20x20">
+              </div>
+              <div class="media-body">
+                <small>
+                <%= review.user.username %>
+                <b style="color:red;">(3)</b>
+                さんの口コミ<br>
+                男性・東京都
+                </small>
+              </div>
+            </div>
+
+            <hr>
+            <h5>
+              <b style="color:red;">
+                  <%= review.score %>
+              </b>
+            </h5>
+
+            <hr>
+            <p><%= review.body %></p>
+          </div>
+
+          <div class="panel-footer">
+            <small>
+              利用規約に違反している口コミは、右のリンクから報告することができます。
+              <a href="#">問題のある口コミを連絡する</a>
+            </small>
+          </div>
+  <% end %>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+      <div class="panel-heading">店舗情報</div>
+
+        <table class="table">
+          <tbody><tr>
+            <th>店名</th>
+            <td><%= @restaurant.name %></td>
+          </tr>
+          <tr>
+            <th>TEL・予約</th>
+            <td><%= @restaurant.telephone %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @restaurant.address %></td>
+          </tr>
+          <tr>
+            <th>ホームページ</th>
+            <td><%= @restaurant.web %></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      人気のお店
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">伊吹</li>
+    <li class="list-group-item">一燈</li>
+    <li class="list-group-item">道</li>
+    <li class="list-group-item">麺屋 吉左右</li>
+  </ul>
+
+</div>
+
+<!--
+            <hr>
+            <h2>レビューを残したユーザー一覧</h2>
+            <%# throughオプションのおかげで、BookはReviewを介してUserにアクセスできる  %>
+            <% @restaurant.users.each do |user| %>
+              <p><%= user.email %></p>
+            <% end %>
+-->
+
+<!--
     <p>
       <strong>Name:</strong>
       <%= @restaurant.name %>
     </p>
-
     <p>
       <strong>Telephone:</strong>
       <%= @restaurant.telephone %>
     </p>
-
     <p>
       <strong>Address:</strong>
       <%= @restaurant.address %>
     </p>
-
     <p>
       <strong>Web:</strong>
       <%= @restaurant.web %>
@@ -26,24 +143,5 @@
     <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
     <%= link_to 'Back', restaurants_path %>
     <%= link_to 'レビューを書く', new_restaurant_review_path(@restaurant) %>
-
-    <hr>
-    <%= @review %>
-    <h2>レビュー一覧</h2>
-        <% @restaurant.reviews.each do |review| %>
-          <p>
-            <%= review.body %> <br>
-            by <%= review.user.email %>
-          </p>
-        <% end %>
-        <hr>
-        <h2>レビューを残したユーザー一覧</h2>
-        <%# throughオプションのおかげで、BookはReviewを介してUserにアクセスできる  %>
-        <% @restaurant.users.each do |user| %>
-          <p><%= user.email %></p>
-        <% end %>
-
-  </div>
-</div>
-
+-->
 
